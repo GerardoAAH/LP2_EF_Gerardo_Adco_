@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos adicionales -->
+    <style>
+        .navbar {
+            background-color: #343a40; 
+        }
+        .navbar-brand {
+            color: #fff; 
+        }
+        .container {
+            max-width: 600px; 
+            margin-top: 20px; 
+        }
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <span class="text-light mr-3">Bienvenido, <span th:text="${nombreUsuario}"></span></span>
+            <div>
+                <a href="/logout" class="btn btn-outline-light">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-container mt-4">
+            <h2 class="mb-4 text-center">Editar Producto</h2>
+            <!-- Formulario para editar producto -->
+            <form action="#" th:action="@{/guardar}" th:object="${producto}" method="post">
+                <!-- Campo oculto para el ID del producto -->
+                <input type="hidden" th:field="*{productoId}">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" id="precio" th:field="*{precio}" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock:</label>
+                    <input type="number" class="form-control" id="stock" th:field="*{stock}" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría:</label>
+                    <select class="form-control" id="categoria" th:field="*{categoria.categoriaId}" required>
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.categoriaId}"
+                                th:text="${categoria.nombreCategoria}">Categoría
+                        </option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a href="/listar" class="btn btn-secondary ml-2">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

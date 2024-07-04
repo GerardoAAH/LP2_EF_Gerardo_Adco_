@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Producto</title>
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos adicionales si es necesario -->
+    <style>
+        .navbar {
+            background-color: #343a40; 
+        }
+        .navbar-brand {
+            color: #fff; 
+        }
+        .container {
+            max-width: 900px; 
+        }
+    </style>
+</head>
+<body>
+	<!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <span class="text-light mr-3">Bienvenido, <span th:text="${nombreUsuario}"></span></span>
+            <div>
+                <a href="/logout" class="btn btn-outline-light">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="mb-4">Detalle de Producto</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                <p class="card-text">Precio: <span th:text="${producto.precio}"></span></p>
+                <p class="card-text">Stock: <span th:text="${producto.stock}"></span></p>
+                <p class="card-text">Categoría: <span th:text="${producto.categoria.nombreCategoria}"></span></p>
+            </div>
+            <div class="card-footer">
+                
+                <a th:href="@{/eliminar/{id}(id=${producto.productoId})}" class="btn btn-sm btn-danger">Eliminar</a>
+                <a href="/listar" class="btn btn-sm btn-secondary float-right">Volver al Listado</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
